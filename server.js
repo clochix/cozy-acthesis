@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}));
 
-port = process.env.PORT || 9250;
+port = process.env.PORT || 9126;
 host = process.env.HOST || "127.0.0.1";
 
 // Serve static content
