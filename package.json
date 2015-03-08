@@ -28,5 +28,7 @@
   "contributors": [
     "Clochix"
   ],
-  "homepage": "https://github.com/clochix/cozy-acthesis"
+  "homepage": "https://github.com/clochix/cozy-acthesis",
+  "cozy-permissions": {},
+  "cozy-displayName": "Acthesis"
 }

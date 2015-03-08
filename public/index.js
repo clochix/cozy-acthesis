@@ -6,6 +6,11 @@ window.addEventListener('load', function () {
   list = document.getElementById('handlers');
   /**
    * XHR wrapper
+   *
+   * @param {String}   url
+   * @param {Function} callback
+   *
+   * @return undefined
    */
   function get(url, cb) {
     var xhr = new XMLHttpRequest();
@@ -47,18 +52,26 @@ window.addEventListener('load', function () {
   function loadHandlers() {
     get('activity', function (err, res) {
       list.innerHTML = '';
-      var handlers;
       if (err) {
         console.error(err);
       } else {
-        handlers = JSON.parse(res.responseText);
-        handlers.forEach(function (handler) {
+        JSON.parse(res.responseText).forEach(function (handler) {
           var item;
           item = document.createElement('li');
           item.innerHTML = `${handler.fullname} - ${handler.href} - ${handler.name} <button data-action="unregister" data-value="${handler.href}">Unregister</button>`;// JSON.stringify(handler, null, 4);
           list.appendChild(item);
         });
 
+      }
+    });
+  }
+
+  function loadDebug() {
+    get('activity/debug', function (err, res) {
+      if (err) {
+        console.error(err);
+      } else {
+        document.getElementById('debug').textContent = JSON.stringify(JSON.parse(res.responseText), null, 2);
       }
     });
   }
@@ -75,6 +88,7 @@ window.addEventListener('load', function () {
         res = JSON.parse(xhr.response);
         if (res.result === 'ok') {
           loadHandlers();
+          loadDebug();
           window.alert("Unregistration successful");
         } else {
           window.alert("Unknown error");
@@ -94,6 +108,7 @@ window.addEventListener('load', function () {
   });
 
   loadHandlers();
+  loadDebug();
 
   options = {
     server: serverUrl,
