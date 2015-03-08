@@ -19,6 +19,7 @@
   },
   "author": "Clochix",
   "license": "GPLv3",
+  "icon-path": "acthesis.png",
   "keywords": [
     "Mozilla",
     "Web Activity",
